@@ -13,6 +13,8 @@ namespace IST303_Keeling_J_Assignment1
             Line line2 = new Line(0, 2, 8);
             Line line3 = new Line(2, 0, 3);
 
+            line2.LineIntersection( line2, line3 );
+
             line2.AreLinesParallel( line2, line3 );
             line3.AreLinesPerpendicular( line3, line2 );
             line2.FindXGivenY(8);
@@ -26,8 +28,12 @@ namespace IST303_Keeling_J_Assignment1
             line4.AreLinesParallel(line4, line5);
             line5.AreLinesPerpendicular(line4, line5);
 
+            line4.LineIntersection( line4, line5 );
+
             Line line6 = new Line(1, -.25, 1);
             Line line7 = new Line(1, 4, 5);
+
+            line6.LineIntersection( line6, line7 );
 
             line6.AreLinesParallel(line6, line7);
             line7.AreLinesPerpendicular(line6, line7);
