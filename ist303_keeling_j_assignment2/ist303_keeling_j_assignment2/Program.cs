@@ -6,14 +6,14 @@ namespace ist303_keeling_j_assignment2
     {
         static void Main(string[] args)
         {
-			Item item = new Item();
-			Vendor vendor = new Vendor();
-			item.SetName( "Snickers" );
-			item.SetPrice( .80 );
-			item.SetQuantity( 12 );
+			Vendor shop = new Vendor();
+			shop.inventory[ 0 ] = new Item( "Medkit", 75, 10 );
+			shop.inventory[ 1 ] = new Item( "Body Armour", 200, 2 );
+			shop.inventory[ 2 ] = new Item( "Assault Rifle", 600, 1 );
+			shop.inventory[ 3 ] = new Item( "Shotgun", 400, 3 );
+			shop.inventory[ 4 ] = new Item( "Pretty Rock", 2.5, 1 );
 
-			Console.WriteLine( "{0, -15} {1,8} {2, 5}", "Product Name", "Price", "Qty" );
-			Console.WriteLine( "{0, -15} {1, 8:C} {2, 5:D}", item.GetName(), item.GetPrice(), item.GetQuantity() );
+			shop.ShopIsOpen();
         }
     }
 }
