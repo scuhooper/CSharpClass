@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ist303_keeling_j_a3
+{
+	class Program
+	{
+		static void Main( string[] args ) {
+			List<Player> players = new List<Player>();
+			List<Player> alreadyPlayed = new List<Player>();
+
+			bool bIsAddingPlayer = true;
+
+			while ( bIsAddingPlayer ) {
+				Console.WriteLine( "Enter the name of the player to be added to the game:" );
+				string tempName = Console.ReadLine();
+				players.Add( new Player( tempName ) );
+				Console.WriteLine( "There are {0} players right now. A minimum of 2 is needed to play.", players.Count() );
+				Console.WriteLine( "Would you like to add another player? Enter y/n" );
+				char choice;
+				char.TryParse( Console.ReadLine(), out choice );
+				char.ToLower( choice );
+				if ( choice == 'y' )
+					bIsAddingPlayer = true;
+				else
+					bIsAddingPlayer = false;
+			}
+
+			while ( players.Count > 1 ) {
+				for ( int i = 1; i < players.Count; i++ ) {
+					players[0].PlayGame( players[i] );
+				}
+				alreadyPlayed.Add( players[0] );
+				players.Remove( players[0] );
+			}
+			alreadyPlayed.Add( players[0] );
+			players.Remove( players[0] );
+
+			var listSortedByWins = from player in alreadyPlayed orderby player.Wins descending select player;
+			foreach ( Player player in listSortedByWins ) {
+				Console.WriteLine( "{0} has {1} wins and {2} losses.", player.Name, player.Wins, player.Losses );
+			}
+
+			var EqualWinLoss = from player in alreadyPlayed where player.Wins == player.Losses select player;
+			foreach ( Player player in EqualWinLoss ) {
+				Console.WriteLine( "{0} has {1} wins and {2} losses.", player.Name, player.Wins, player.Losses );
+			}
+		}
+	}
+}
