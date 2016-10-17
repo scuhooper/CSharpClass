@@ -13,9 +13,10 @@ namespace ist303_keeling_j_a4
 
 		public Vessel( float _speed, string _name )
 		{
+			if ( _speed < 1 )
+				_speed = 1;
+			
 			speed = _speed;
-			if ( speed < 1 )
-				speed = 1;
 			name = _name;
 		}
 
@@ -24,7 +25,7 @@ namespace ist303_keeling_j_a4
 		/// </summary>
 		public virtual void Move()
 		{
-			Console.WriteLine( "{0} has moved {1} feet.", name, speed );
+			Console.WriteLine( "{0} has moved {1} knot.", name, speed );
 		}
 	}
 }

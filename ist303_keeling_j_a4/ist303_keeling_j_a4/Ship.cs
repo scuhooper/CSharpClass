@@ -9,11 +9,14 @@ namespace ist303_keeling_j_a4
 	class Ship : Vessel, IRefillable
 	{
 		int fuel, maxFuel;
+		float fuelPercentage;
+		public Boat lifeBoat;
+
         public float FuelPercentage
         {
             get
             {
-                return FuelPercentage;
+                return fuelPercentage;
             }
             set
             {
@@ -21,7 +24,7 @@ namespace ist303_keeling_j_a4
                     value = 0;
                 else if ( value > 1 )
                     value = 1;
-                FuelPercentage = value;
+                fuelPercentage = value;
             }
         }
 
@@ -31,29 +34,43 @@ namespace ist303_keeling_j_a4
 			fuel = _fuel;
 			if ( fuel < 0 )
 				fuel = 0;
+
 			maxFuel = _maxFuel;
 			if ( maxFuel < 1 )
 				maxFuel = 1;
 
-            FuelPercentage = fuel / maxFuel;
+			lifeBoat = new Boat( 5, name + "'s lifeboat", 2 );
+			FuelPercentage = (float)fuel / (float)maxFuel;
 		}
 
 		public override void Move()
 		{
 			if ( fuel > 0 )
 			{
-				Console.WriteLine( "{0} has moved {1} feet. It has {2} fuel remaining.", name, speed, fuel );
+				fuel--;
+				FuelPercentage = ( float )fuel / ( float )maxFuel;
+				Console.WriteLine( "{0} has moved {1} knots. It has {2:P} fuel remaining.", name, speed, FuelPercentage );
 			}
+			else
+				Console.WriteLine( "{0} is out of fuel!", name );
+		}
+
+		public void PrintFuelPercentage() 
+		{
+			Console.WriteLine( "{0} has {1:P} fuel remaining.", name, FuelPercentage );
 		}
 
         public void Refill( int amount )
         {
-            if ( amount < 0 )
-                amount = 0;
+			if ( amount < 0 )
+				amount = 0;
+			else if ( amount > maxFuel - fuel )
+				amount = maxFuel - fuel;
 
             fuel += amount;
-            if ( fuel > maxFuel )
-                fuel = maxFuel;
+
+			FuelPercentage = (float)fuel / (float)maxFuel;
+			Console.WriteLine( "{0} refilled {1} fuel and now has {2:P} fuel remaining.", name, amount, FuelPercentage );
         }
 	}
 }

@@ -9,7 +9,7 @@ namespace ist303_keeling_j_a4
     class Boat : Vessel
     {
         int numOfOars;
-        public Boat( int _numOfOars,float _speed, string _name )
+        public Boat( float _speed, string _name, int _numOfOars )
             : base( _speed, _name )
         {
             if ( _numOfOars < 1 )
