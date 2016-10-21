@@ -15,15 +15,7 @@ namespace ist303_keeling_j_a4
         {
             get
             {
-                return fuelPercentage;
-            }
-            set
-            {
-                if ( value < 0 )
-                    value = 0;
-                else if ( value > 1 )
-                    value = 1;
-                fuelPercentage = value;
+				return (float)hunger / (float)maxHunger;
             }
         }
 
@@ -31,8 +23,6 @@ namespace ist303_keeling_j_a4
         {
             hunger = _hunger;
             maxHunger = _maxHunger;
-
-            FuelPercentage = (float)hunger / (float)maxHunger;
         }
 
 		public void PrintHungerPercentage() {
@@ -47,8 +37,6 @@ namespace ist303_keeling_j_a4
 				amount = hunger;
 
 			hunger -= amount;
-
-			FuelPercentage = (float)hunger / (float)maxHunger;
 
 			Console.WriteLine( "Cat ate {0} morsels of food and is now {1:P} hungry.", amount, FuelPercentage );
         }

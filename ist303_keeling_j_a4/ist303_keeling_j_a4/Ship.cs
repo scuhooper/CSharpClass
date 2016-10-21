@@ -16,15 +16,7 @@ namespace ist303_keeling_j_a4
         {
             get
             {
-                return fuelPercentage;
-            }
-            set
-            {
-                if ( value < 0 )
-                    value = 0;
-                else if ( value > 1 )
-                    value = 1;
-                fuelPercentage = value;
+                return (float)fuel / (float)maxFuel;
             }
         }
 
@@ -40,7 +32,6 @@ namespace ist303_keeling_j_a4
 				maxFuel = 1;
 
 			lifeBoat = new Boat( 5, name + "'s lifeboat", 2 );
-			FuelPercentage = (float)fuel / (float)maxFuel;
 		}
 
 		public override void Move()
@@ -48,7 +39,6 @@ namespace ist303_keeling_j_a4
 			if ( fuel > 0 )
 			{
 				fuel--;
-				FuelPercentage = ( float )fuel / ( float )maxFuel;
 				Console.WriteLine( "{0} has moved {1} knots. It has {2:P} fuel remaining.", name, speed, FuelPercentage );
 			}
 			else
@@ -69,7 +59,6 @@ namespace ist303_keeling_j_a4
 
             fuel += amount;
 
-			FuelPercentage = (float)fuel / (float)maxFuel;
 			Console.WriteLine( "{0} refilled {1} fuel and now has {2:P} fuel remaining.", name, amount, FuelPercentage );
         }
 	}

@@ -30,6 +30,7 @@ namespace ist303_keeling_j_a4
 			foreach ( Vessel ves in vessels ) 
 			{
 				ves.Move();
+				Console.WriteLine();
 			}
 
 			List<IRefillable> refills = new List<IRefillable>();
@@ -42,6 +43,7 @@ namespace ist303_keeling_j_a4
 			ship2.PrintFuelPercentage();
 			ship3.PrintFuelPercentage();
 			cat.PrintHungerPercentage();
+			Console.WriteLine();
 
 			foreach ( IRefillable refill in refills ) {
 				refill.Refill( 2 );

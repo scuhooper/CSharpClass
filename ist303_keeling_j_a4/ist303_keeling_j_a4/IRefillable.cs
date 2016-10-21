@@ -8,7 +8,7 @@ namespace ist303_keeling_j_a4
 {
     interface IRefillable
     {
-        float FuelPercentage { get; set; }
+        float FuelPercentage { get; }
 
         void Refill( int amount );
     }
