@@ -13,40 +13,54 @@ namespace ist303_keeling_j_a5
 
 		string secretWord;
 		string displayedWord;
+		bool bIsLetterInWord = false;
 
 		public HangmanGame()
 		{
-			lettersGuessed.Add( 'A', false );
-			lettersGuessed.Add( 'B', false );
-			lettersGuessed.Add( 'C', false );
-			lettersGuessed.Add( 'D', false );
-			lettersGuessed.Add( 'E', false );
-			lettersGuessed.Add( 'F', false );
-			lettersGuessed.Add( 'G', false );
-			lettersGuessed.Add( 'H', false );
-			lettersGuessed.Add( 'I', false );
-			lettersGuessed.Add( 'J', false );
-			lettersGuessed.Add( 'K', false );
-			lettersGuessed.Add( 'L', false );
-			lettersGuessed.Add( 'M', false );
-			lettersGuessed.Add( 'N', false );
-			lettersGuessed.Add( 'O', false );
-			lettersGuessed.Add( 'P', false );
-			lettersGuessed.Add( 'Q', false );
-			lettersGuessed.Add( 'R', false );
-			lettersGuessed.Add( 'S', false );
-			lettersGuessed.Add( 'T', false );
-			lettersGuessed.Add( 'U', false );
-			lettersGuessed.Add( 'V', false );
-			lettersGuessed.Add( 'W', false );
-			lettersGuessed.Add( 'X', false );
-			lettersGuessed.Add( 'Y', false );
-			lettersGuessed.Add( 'Z', false );
+			secretWord = "HAPPY HALLOWEEN";
+			ResetDisplayedWord();
 		}
 
 		public void SubmitGuess( char c )
 		{
-			lettersGuessed[ c ] = true;
+			bIsLetterInWord = false;
+			lettersGuessed.Add( c, true );
+			for ( int i = 0; i < secretWord.Length; i++ )
+			{
+				if ( secretWord[ i ] == c ) {
+					string tempStr = displayedWord.Substring( 0, i ) + c + displayedWord.Substring( i + 1, displayedWord.Length - ( i + 1 ) );
+					displayedWord = tempStr;
+					bIsLetterInWord = true;
+				}
+			}
+		}
+
+		public string PrintDisplayedWord()
+		{
+			return displayedWord;
+		}
+
+		public bool IsLetterInWord()
+		{
+			return bIsLetterInWord;
+		}
+
+		public void Reset()
+		{
+			ResetDisplayedWord();
+			bIsLetterInWord = false;
+		}
+
+		void ResetDisplayedWord()
+		{
+			displayedWord = "";
+			foreach ( char c in secretWord )
+			{
+				if ( c != ' ' )
+					displayedWord += '_';
+				else
+					displayedWord += ' ';
+			}
 		}
 	}
 }

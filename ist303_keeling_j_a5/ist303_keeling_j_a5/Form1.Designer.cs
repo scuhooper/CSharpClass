@@ -33,6 +33,7 @@
 			this.btnPlay = new System.Windows.Forms.Button();
 			this.btnQuit = new System.Windows.Forms.Button();
 			this.pnlGame = new System.Windows.Forms.Panel();
+			this.lblError = new System.Windows.Forms.Label();
 			this.lblSecretWord = new System.Windows.Forms.Label();
 			this.lblLeftLeg = new System.Windows.Forms.Label();
 			this.lblRightLeg = new System.Windows.Forms.Label();
@@ -46,7 +47,7 @@
 			this.mtxtGuess = new System.Windows.Forms.MaskedTextBox();
 			this.lblHistory = new System.Windows.Forms.Label();
 			this.lblLettersGuessed = new System.Windows.Forms.Label();
-			this.lblError = new System.Windows.Forms.Label();
+			this.btnReset = new System.Windows.Forms.Button();
 			this.pnlTitleScreen.SuspendLayout();
 			this.pnlGame.SuspendLayout();
 			this.SuspendLayout();
@@ -96,6 +97,7 @@
 			// 
 			// pnlGame
 			// 
+			this.pnlGame.Controls.Add(this.btnReset);
 			this.pnlGame.Controls.Add(this.lblError);
 			this.pnlGame.Controls.Add(this.lblSecretWord);
 			this.pnlGame.Controls.Add(this.lblLeftLeg);
@@ -115,6 +117,18 @@
 			this.pnlGame.Size = new System.Drawing.Size(621, 667);
 			this.pnlGame.TabIndex = 3;
 			this.pnlGame.Visible = false;
+			// 
+			// lblError
+			// 
+			this.lblError.AutoSize = true;
+			this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblError.ForeColor = System.Drawing.Color.Red;
+			this.lblError.Location = new System.Drawing.Point(192, 458);
+			this.lblError.Name = "lblError";
+			this.lblError.Size = new System.Drawing.Size(46, 18);
+			this.lblError.TabIndex = 14;
+			this.lblError.Text = "label1";
+			this.lblError.Visible = false;
 			// 
 			// lblSecretWord
 			// 
@@ -254,17 +268,17 @@
 			this.lblLettersGuessed.TabIndex = 0;
 			this.lblLettersGuessed.Text = "Guessed Letters";
 			// 
-			// lblError
+			// btnReset
 			// 
-			this.lblError.AutoSize = true;
-			this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblError.ForeColor = System.Drawing.Color.Red;
-			this.lblError.Location = new System.Drawing.Point(192, 458);
-			this.lblError.Name = "lblError";
-			this.lblError.Size = new System.Drawing.Size(46, 18);
-			this.lblError.TabIndex = 14;
-			this.lblError.Text = "label1";
-			this.lblError.Visible = false;
+			this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnReset.Location = new System.Drawing.Point(231, 322);
+			this.btnReset.Name = "btnReset";
+			this.btnReset.Size = new System.Drawing.Size(158, 29);
+			this.btnReset.TabIndex = 15;
+			this.btnReset.Text = "Play Again?";
+			this.btnReset.UseVisualStyleBackColor = true;
+			this.btnReset.Visible = false;
+			this.btnReset.Click += new System.EventHandler(this.btnPlay_Click);
 			// 
 			// frmMain
 			// 
@@ -308,6 +322,7 @@
 		private System.Windows.Forms.Label lblNoose;
 		private System.Windows.Forms.Label lblSecretWord;
 		private System.Windows.Forms.Label lblError;
+		private System.Windows.Forms.Button btnReset;
 	}
 }
 
