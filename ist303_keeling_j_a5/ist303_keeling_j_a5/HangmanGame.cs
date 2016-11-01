@@ -4,20 +4,23 @@ using System.Linq;
 using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ist303_keeling_j_a5
 {
 	class HangmanGame
 	{
 		public SortedDictionary<char, bool> lettersGuessed = new SortedDictionary<char, bool>();
+		string[] wordBank = File.ReadAllLines( "wordlist.txt" );
 
 		string secretWord;
 		string displayedWord;
 		bool bIsLetterInWord = false;
+		static Random rand = new Random();
 
 		public HangmanGame()
 		{
-			secretWord = "HAPPY HALLOWEEN";
+			secretWord = wordBank[ rand.Next( 0, wordBank.Length ) ].ToUpper();
 			ResetDisplayedWord();
 		}
 
@@ -47,7 +50,9 @@ namespace ist303_keeling_j_a5
 
 		public void Reset()
 		{
+			secretWord = wordBank[ rand.Next( 0, wordBank.Length ) ].ToUpper();
 			ResetDisplayedWord();
+			ResetDictionary();
 			bIsLetterInWord = false;
 		}
 
@@ -61,6 +66,22 @@ namespace ist303_keeling_j_a5
 				else
 					displayedWord += ' ';
 			}
+		}
+
+		void ResetDictionary()
+		{
+			lettersGuessed = new SortedDictionary<char, bool>();
+		}
+
+		public bool CheckForWinner()
+		{
+			foreach ( char c in displayedWord )
+			{
+				if ( c == '_' )
+					return false;
+			}
+
+			return true;
 		}
 	}
 }

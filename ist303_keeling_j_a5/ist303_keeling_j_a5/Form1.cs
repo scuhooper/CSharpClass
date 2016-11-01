@@ -67,15 +67,23 @@ namespace ist303_keeling_j_a5
 						mtxtGuess.Enabled = false;
 						btnSubmitGuess.Enabled = false;
 						btnReset.Visible = true;
-					}	
+					}
 				}
+				else if ( game.CheckForWinner() )
+				{
+					lblError.Text = "You win!!";
+					lblError.Visible = true;
+					mtxtGuess.Enabled = false;
+					btnSubmitGuess.Enabled = false;
+					btnReset.Visible = true;
+				}
+
 			}
 		}
 
 		private void btnPlay_Click( object sender, EventArgs e )
 		{
 			ResetForm();
-
 			ResetGame();
 		}
 

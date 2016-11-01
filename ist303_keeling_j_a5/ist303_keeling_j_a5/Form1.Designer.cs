@@ -33,6 +33,7 @@
 			this.btnPlay = new System.Windows.Forms.Button();
 			this.btnQuit = new System.Windows.Forms.Button();
 			this.pnlGame = new System.Windows.Forms.Panel();
+			this.btnReset = new System.Windows.Forms.Button();
 			this.lblError = new System.Windows.Forms.Label();
 			this.lblSecretWord = new System.Windows.Forms.Label();
 			this.lblLeftLeg = new System.Windows.Forms.Label();
@@ -47,7 +48,6 @@
 			this.mtxtGuess = new System.Windows.Forms.MaskedTextBox();
 			this.lblHistory = new System.Windows.Forms.Label();
 			this.lblLettersGuessed = new System.Windows.Forms.Label();
-			this.btnReset = new System.Windows.Forms.Button();
 			this.pnlTitleScreen.SuspendLayout();
 			this.pnlGame.SuspendLayout();
 			this.SuspendLayout();
@@ -118,35 +118,47 @@
 			this.pnlGame.TabIndex = 3;
 			this.pnlGame.Visible = false;
 			// 
+			// btnReset
+			// 
+			this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnReset.Location = new System.Drawing.Point(231, 322);
+			this.btnReset.Name = "btnReset";
+			this.btnReset.Size = new System.Drawing.Size(158, 29);
+			this.btnReset.TabIndex = 15;
+			this.btnReset.Text = "Play Again?";
+			this.btnReset.UseVisualStyleBackColor = true;
+			this.btnReset.Visible = false;
+			this.btnReset.Click += new System.EventHandler(this.btnPlay_Click);
+			// 
 			// lblError
 			// 
-			this.lblError.AutoSize = true;
 			this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblError.ForeColor = System.Drawing.Color.Red;
-			this.lblError.Location = new System.Drawing.Point(192, 458);
+			this.lblError.Location = new System.Drawing.Point(112, 458);
 			this.lblError.Name = "lblError";
-			this.lblError.Size = new System.Drawing.Size(46, 18);
+			this.lblError.Size = new System.Drawing.Size(397, 18);
 			this.lblError.TabIndex = 14;
 			this.lblError.Text = "label1";
+			this.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.lblError.Visible = false;
 			// 
 			// lblSecretWord
 			// 
-			this.lblSecretWord.AutoSize = true;
 			this.lblSecretWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblSecretWord.Location = new System.Drawing.Point(228, 272);
+			this.lblSecretWord.Location = new System.Drawing.Point(66, 272);
 			this.lblSecretWord.Name = "lblSecretWord";
-			this.lblSecretWord.Size = new System.Drawing.Size(164, 31);
+			this.lblSecretWord.Size = new System.Drawing.Size(488, 31);
 			this.lblSecretWord.TabIndex = 13;
 			this.lblSecretWord.Text = "Secret Word";
+			this.lblSecretWord.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// lblLeftLeg
 			// 
 			this.lblLeftLeg.AutoSize = true;
-			this.lblLeftLeg.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLeftLeg.Location = new System.Drawing.Point(338, 104);
+			this.lblLeftLeg.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblLeftLeg.Location = new System.Drawing.Point(337, 130);
 			this.lblLeftLeg.Name = "lblLeftLeg";
-			this.lblLeftLeg.Size = new System.Drawing.Size(12, 18);
+			this.lblLeftLeg.Size = new System.Drawing.Size(18, 25);
 			this.lblLeftLeg.TabIndex = 12;
 			this.lblLeftLeg.Text = "/";
 			this.lblLeftLeg.Visible = false;
@@ -154,10 +166,10 @@
 			// lblRightLeg
 			// 
 			this.lblRightLeg.AutoSize = true;
-			this.lblRightLeg.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblRightLeg.Location = new System.Drawing.Point(352, 104);
+			this.lblRightLeg.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblRightLeg.Location = new System.Drawing.Point(359, 129);
 			this.lblRightLeg.Name = "lblRightLeg";
-			this.lblRightLeg.Size = new System.Drawing.Size(12, 18);
+			this.lblRightLeg.Size = new System.Drawing.Size(18, 25);
 			this.lblRightLeg.TabIndex = 11;
 			this.lblRightLeg.Text = "\\";
 			this.lblRightLeg.Visible = false;
@@ -165,10 +177,10 @@
 			// lblRightArm
 			// 
 			this.lblRightArm.AutoSize = true;
-			this.lblRightArm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblRightArm.Location = new System.Drawing.Point(354, 70);
+			this.lblRightArm.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblRightArm.Location = new System.Drawing.Point(360, 86);
 			this.lblRightArm.Name = "lblRightArm";
-			this.lblRightArm.Size = new System.Drawing.Size(12, 18);
+			this.lblRightArm.Size = new System.Drawing.Size(18, 25);
 			this.lblRightArm.TabIndex = 10;
 			this.lblRightArm.Text = "\\";
 			this.lblRightArm.Visible = false;
@@ -176,10 +188,10 @@
 			// lblLeftArm
 			// 
 			this.lblLeftArm.AutoSize = true;
-			this.lblLeftArm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLeftArm.Location = new System.Drawing.Point(337, 70);
+			this.lblLeftArm.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblLeftArm.Location = new System.Drawing.Point(337, 86);
 			this.lblLeftArm.Name = "lblLeftArm";
-			this.lblLeftArm.Size = new System.Drawing.Size(12, 18);
+			this.lblLeftArm.Size = new System.Drawing.Size(18, 25);
 			this.lblLeftArm.TabIndex = 9;
 			this.lblLeftArm.Text = "/";
 			this.lblLeftArm.Visible = false;
@@ -187,10 +199,10 @@
 			// lblBody
 			// 
 			this.lblBody.AutoSize = true;
-			this.lblBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblBody.Location = new System.Drawing.Point(345, 68);
+			this.lblBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblBody.Location = new System.Drawing.Point(349, 84);
 			this.lblBody.Name = "lblBody";
-			this.lblBody.Size = new System.Drawing.Size(13, 36);
+			this.lblBody.Size = new System.Drawing.Size(17, 50);
 			this.lblBody.TabIndex = 8;
 			this.lblBody.Text = "|\r\n|";
 			this.lblBody.Visible = false;
@@ -198,10 +210,10 @@
 			// lblHead
 			// 
 			this.lblHead.AutoSize = true;
-			this.lblHead.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblHead.Location = new System.Drawing.Point(341, 53);
+			this.lblHead.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblHead.Location = new System.Drawing.Point(345, 64);
 			this.lblHead.Name = "lblHead";
-			this.lblHead.Size = new System.Drawing.Size(20, 18);
+			this.lblHead.Size = new System.Drawing.Size(28, 25);
 			this.lblHead.TabIndex = 7;
 			this.lblHead.Text = "O";
 			this.lblHead.Visible = false;
@@ -209,10 +221,10 @@
 			// lblNoose
 			// 
 			this.lblNoose.AutoSize = true;
-			this.lblNoose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblNoose.Location = new System.Drawing.Point(255, 16);
+			this.lblNoose.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblNoose.Location = new System.Drawing.Point(241, 16);
 			this.lblNoose.Name = "lblNoose";
-			this.lblNoose.Size = new System.Drawing.Size(102, 162);
+			this.lblNoose.Size = new System.Drawing.Size(130, 225);
 			this.lblNoose.TabIndex = 6;
 			this.lblNoose.Text = "      ________\r\n      |               |\r\n      |\r\n      |\r\n      |\r\n      |\r\n    " +
     "  |\r\n      |\r\n___|___";
@@ -245,7 +257,7 @@
 			this.mtxtGuess.Mask = "L";
 			this.mtxtGuess.Name = "mtxtGuess";
 			this.mtxtGuess.Size = new System.Drawing.Size(32, 24);
-			this.mtxtGuess.TabIndex = 3;
+			this.mtxtGuess.TabIndex = 1;
 			this.mtxtGuess.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// lblHistory
@@ -267,18 +279,6 @@
 			this.lblLettersGuessed.Size = new System.Drawing.Size(132, 18);
 			this.lblLettersGuessed.TabIndex = 0;
 			this.lblLettersGuessed.Text = "Guessed Letters";
-			// 
-			// btnReset
-			// 
-			this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnReset.Location = new System.Drawing.Point(231, 322);
-			this.btnReset.Name = "btnReset";
-			this.btnReset.Size = new System.Drawing.Size(158, 29);
-			this.btnReset.TabIndex = 15;
-			this.btnReset.Text = "Play Again?";
-			this.btnReset.UseVisualStyleBackColor = true;
-			this.btnReset.Visible = false;
-			this.btnReset.Click += new System.EventHandler(this.btnPlay_Click);
 			// 
 			// frmMain
 			// 
