@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ist303_keeling_j_a5
 {
 	public partial class frmMain : Form
 	{
-		HangmanGame game = new HangmanGame();
-		Label[] hangman = new Label[ 6 ];
-		int nextBodyPart = 0;
+		HangmanGame game = new HangmanGame();	// create variable of game object for form
+		Label[] hangman = new Label[ 6 ];	// create an array of the 6 hangman labels for incorrect guesses
+		int nextBodyPart = 0;	// keep track of which body part should be displayed next
 
 		public frmMain()
 		{
@@ -28,54 +22,66 @@ namespace ist303_keeling_j_a5
 
 		private void btnSubmitGuess_Click( object sender, EventArgs e )
 		{
-			if ( mtxtGuess.Text.Length == 0 )
+			if ( mtxtGuess.Text.Length == 0 )	// check if there is no input in the text box
 			{
+				// print error message letting user know they need to enter a guess
 				lblError.Visible = true;
 				lblError.Text = "Please enter a letter to guess.";
 				return;
 			}
 
-			char temp = mtxtGuess.Text.ToUpper()[ 0 ];
-			if ( game.lettersGuessed.ContainsKey(temp) )
+			char temp = mtxtGuess.Text.ToUpper()[ 0 ];	// get the letter from the Guess text box and make it uppercase
+			if ( game.lettersGuessed.ContainsKey(temp) )	// check if hashtable has a key listed for the character guessed
 			{
+				// print error letting user know the letter has already been guessed
 				lblError.Visible = true;
 				lblError.Text = "The letter " + temp + " has already been guessed.";
 			}
 			else
 			{
+				game.SubmitGuess( temp );	// submit letter guessed to game logic
 
-				game.SubmitGuess( temp );
+				lblError.Visible = false;   // hide the error label as it no longer applies
+				lblHistory.Text = "";	// make the history of guessed letters empty
 
-				lblError.Visible = false;
-				lblHistory.Text = "";
 				foreach ( KeyValuePair<char, bool> key in game.lettersGuessed )
 				{
 					if(key.Value)
-						lblHistory.Text += key.Key + " ";
+						lblHistory.Text += key.Key + " ";	// add all the keys (chars) that have been guessed to the history of guessed letters printed on screen
 				}
-				lblSecretWord.Text = game.PrintDisplayedWord();
-				mtxtGuess.Text = "";
 
-				if ( !game.IsLetterInWord() )
+				lblSecretWord.Text = game.GetDisplayedWord();	// set the text for the secret word on the screen to be the updated displayed word
+				mtxtGuess.Text = "";	// clear the contents of the guess text box
+
+				if ( !game.IsLetterInWord() )	// if the guess was incorrect
 				{
-					hangman[ nextBodyPart ].Visible = true;
-					nextBodyPart++;
-					if ( nextBodyPart >= hangman.Length )
+					hangman[ nextBodyPart ].Visible = true;	// display the next hangman bodypart
+					nextBodyPart++;	// increase the body part index
+
+					if ( nextBodyPart >= hangman.Length )	// if all body parts have been cycled through
 					{
+						// inform user they have run out of guesses
 						lblError.Text = "You have run out of guesses!";
 						lblError.Visible = true;
+
+						// disable the ability to make more guesses
 						mtxtGuess.Enabled = false;
 						btnSubmitGuess.Enabled = false;
-						btnReset.Visible = true;
+
+						btnReset.Visible = true;	// make play again button visible
 					}
 				}
-				else if ( game.CheckForWinner() )
+				else if ( game.CheckForWinner() )	// if the guess was correct, check if the game has been won
 				{
+					// inform user they have won the game
 					lblError.Text = "You win!!";
 					lblError.Visible = true;
+
+					// disable the ability to make more guesses
 					mtxtGuess.Enabled = false;
 					btnSubmitGuess.Enabled = false;
-					btnReset.Visible = true;
+
+					btnReset.Visible = true;	// make play again button visible
 				}
 
 			}
@@ -83,13 +89,16 @@ namespace ist303_keeling_j_a5
 
 		private void btnPlay_Click( object sender, EventArgs e )
 		{
+			// when play or play again is clicked, reset the game and form
 			ResetForm();
 			ResetGame();
 		}
 
 		private void frmMain_Load( object sender, EventArgs e )
 		{
-			lblSecretWord.Text = game.PrintDisplayedWord();
+			lblSecretWord.Text = game.GetDisplayedWord();	// make the secret word on the form resemble that of the displayed word from hangman
+
+			// instantiate the array of hangman body parts to be displayed
 			hangman[ 0 ] = lblHead;
 			hangman[ 1 ] = lblBody;
 			hangman[ 2 ] = lblRightArm;
@@ -98,21 +107,31 @@ namespace ist303_keeling_j_a5
 			hangman[ 5 ] = lblLeftLeg;
 		}
 
+		/// <summary>
+		/// Resets the Windows form to show a new game of hangman
+		/// </summary>
 		void ResetForm()
 		{
-			pnlTitleScreen.Visible = false;
-			pnlGame.Visible = true;
-			btnReset.Visible = false;
-			lblError.Visible = false;
+			pnlTitleScreen.Visible = false;	// hide the menu panel
+			pnlGame.Visible = true;	// show the game panel
+			btnReset.Visible = false;   // hide the play again button
+			lblError.Visible = false;	// hide the error label
+
+			// enable the player to be able to make guesses
 			btnSubmitGuess.Enabled = true;
 			mtxtGuess.Enabled = true;
 		}
+
+		/// <summary>
+		/// Reset the hangman game variable
+		/// </summary>
 		void ResetGame()
 		{
-			game.Reset();
-			lblSecretWord.Text = game.PrintDisplayedWord();
-			lblHistory.Text = "";
+			game.Reset();	// calls the reset function of the actual hangman game object
+			lblSecretWord.Text = game.GetDisplayedWord();	// sets the secret word on the form to be that of the displayed word for hangman
+			lblHistory.Text = "";   // clears the letters guessed history
 
+			// hide all the hangman body parts for incorrect guesses
 			foreach ( Label l in hangman )
 				l.Visible = false;
 		}
