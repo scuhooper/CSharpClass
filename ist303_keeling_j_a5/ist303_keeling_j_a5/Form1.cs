@@ -31,11 +31,13 @@ namespace ist303_keeling_j_a5
 			}
 
 			char temp = mtxtGuess.Text.ToUpper()[ 0 ];	// get the letter from the Guess text box and make it uppercase
-			if ( game.lettersGuessed.ContainsKey(temp) )	// check if hashtable has a key listed for the character guessed
+			bool bOut;	// just for the out param in TryGetValue
+			if ( game.lettersGuessed.TryGetValue(temp, out bOut)) //game.lettersGuessed.ContainsKey(temp) )	// check if hashtable has a key listed for the character guessed
 			{
 				// print error letting user know the letter has already been guessed
 				lblError.Visible = true;
 				lblError.Text = "The letter " + temp + " has already been guessed.";
+				mtxtGuess.Text = "";
 			}
 			else
 			{
@@ -55,33 +57,11 @@ namespace ist303_keeling_j_a5
 
 				if ( !game.IsLetterInWord() )	// if the guess was incorrect
 				{
-					hangman[ nextBodyPart ].Visible = true;	// display the next hangman bodypart
-					nextBodyPart++;	// increase the body part index
-
-					if ( nextBodyPart >= hangman.Length )	// if all body parts have been cycled through
-					{
-						// inform user they have run out of guesses
-						lblError.Text = "You have run out of guesses!";
-						lblError.Visible = true;
-
-						// disable the ability to make more guesses
-						mtxtGuess.Enabled = false;
-						btnSubmitGuess.Enabled = false;
-
-						btnReset.Visible = true;	// make play again button visible
-					}
+					DrawHangman();	// draw next piece of the hangman
 				}
 				else if ( game.CheckForWinner() )	// if the guess was correct, check if the game has been won
 				{
-					// inform user they have won the game
-					lblError.Text = "You win!!";
-					lblError.Visible = true;
-
-					// disable the ability to make more guesses
-					mtxtGuess.Enabled = false;
-					btnSubmitGuess.Enabled = false;
-
-					btnReset.Visible = true;	// make play again button visible
+					VictoryScreen();	// display the victory screen
 				}
 
 			}
@@ -134,6 +114,56 @@ namespace ist303_keeling_j_a5
 			// hide all the hangman body parts for incorrect guesses
 			foreach ( Label l in hangman )
 				l.Visible = false;
+		}
+
+		/// <summary>
+		/// Disable the guess text box and submit button. Also shows the Play Again button.
+		/// </summary>
+		void DisableGuessing()
+		{
+			// disable the ability to make more guesses
+			mtxtGuess.Enabled = false;
+			btnSubmitGuess.Enabled = false;
+
+			btnReset.Visible = true;    // make play again button visible
+		}
+
+		/// <summary>
+		/// Draw the next part of the hangman and check if the game is over
+		/// </summary>
+		void DrawHangman()
+		{
+			hangman[ nextBodyPart ].Visible = true; // display the next hangman bodypart
+			nextBodyPart++; // increase the body part index
+
+			CheckForLoss();	// check for game over
+		}
+
+		/// <summary>
+		/// Setup the victory screen
+		/// </summary>
+		void VictoryScreen()
+		{
+			// inform user they have won the game
+			lblError.Text = "You win!!";
+			lblError.Visible = true;
+
+			DisableGuessing();
+		}
+
+		/// <summary>
+		/// Check to see if the game is over
+		/// </summary>
+		void CheckForLoss()
+		{
+			if ( nextBodyPart >= hangman.Length )   // if all body parts have been cycled through
+			{
+				// inform user they have run out of guesses
+				lblError.Text = "You have run out of guesses!";
+				lblError.Visible = true;
+
+				DisableGuessing();
+			}
 		}
 	}
 }
