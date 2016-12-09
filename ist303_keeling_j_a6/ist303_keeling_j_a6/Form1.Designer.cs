@@ -65,6 +65,7 @@
 			this.txtActivityName.Name = "txtActivityName";
 			this.txtActivityName.Size = new System.Drawing.Size(200, 20);
 			this.txtActivityName.TabIndex = 2;
+			this.txtActivityName.TextChanged += new System.EventHandler(this.txtActivityName_TextChanged);
 			// 
 			// btnAddActivity
 			// 

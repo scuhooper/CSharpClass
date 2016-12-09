@@ -13,7 +13,8 @@ namespace ist303_keeling_j_a6
 {
 	public partial class frmMain: Form
 	{
-		List<Activity> activityList = new List<Activity>();	// list of activities for todo list
+		List<Activity> activityList = new List<Activity>(); // list of activities for todo list
+		string fileName = "todolist.txt";
 
 		public frmMain()
 		{
@@ -23,9 +24,9 @@ namespace ist303_keeling_j_a6
 		private void frmMain_Load( object sender, EventArgs e )
 		{
 			// read from a file if one exists already
-			if ( File.Exists( "todolist.txt" ) )
+			if ( File.Exists( fileName ) )
 			{
-				byte[] buffer = File.ReadAllBytes( "todolist.txt" );	// get file contents as bytes
+				byte[] buffer = File.ReadAllBytes( fileName );	// get file contents as bytes
 
 				if ( buffer.Length == 0 )	// check if file was empty, will get bounds errors without this checking
 					return;
@@ -54,18 +55,20 @@ namespace ist303_keeling_j_a6
 				{	
 					// file has corrupt data. this alerts user and deletes the file
 					MessageBox.Show( "The file has been altered. Starting with a blank ToDo list." );
-					File.Delete( "todolist.txt" );
+					File.Delete( fileName );
 				}
 			}
 		}
 
 		private void btnQuit_Click( object sender, EventArgs e )
 		{
-			if ( activityList.Count == 0 )	// if list is empty, don't make empty file
-				Application.Exit();
+			FileStream listFile;
 
-			File.WriteAllText( "todolist.txt", string.Empty );	// overwrite files contents
-			FileStream listFile = File.OpenWrite( "todolist.txt" ); // open file for writing
+			if ( File.Exists( fileName ) )
+				listFile = File.Open( fileName, FileMode.Truncate );
+			else
+				listFile = File.OpenWrite( fileName ); // open file for writing
+
 			string stringFromList = string.Empty;	// set string to empty
 
 			// add each activity as a string to stringFromList
@@ -76,7 +79,7 @@ namespace ist303_keeling_j_a6
 
 			byte[] buffer = Encoding.ASCII.GetBytes( stringFromList );	// convert string to byte array
 			listFile.Write( buffer, 0, buffer.Length );	// write byte array to disk
-			listFile.Close();	// clost file
+			listFile.Close();	// close file
 			Application.Exit();	// exit app
 		}
 
@@ -103,6 +106,10 @@ namespace ist303_keeling_j_a6
 
 		private void btnRemoveActivity_Click( object sender, EventArgs e )
 		{
+			// leave if nothing is selected - causes bounds error if checking is removed
+			if ( lstToDoList.SelectedItem == null )
+				return;
+
 			lstToDoList.Items.Remove( lstToDoList.Items[ lstToDoList.SelectedIndex ] );	// remove item from listbox
 			UpdateActivityList();	// copy list box list to activity list
 		}
@@ -138,6 +145,18 @@ namespace ist303_keeling_j_a6
 			// copy list box list into activity list
 			foreach ( Activity act in lstToDoList.Items )
 				activityList.Add( act );
+		}
+
+		private void txtActivityName_TextChanged( object sender, EventArgs e )
+		{
+			// sanitize input by checking for commas - commas are used as delimiters for file and will break the todo list when loading from file
+			if ( txtActivityName.Text.Contains( "," ) )
+			{
+				btnAddActivity.Enabled = false;
+				MessageBox.Show( "The activity name cannot have any commas inside of it." );
+			}
+			else
+				btnAddActivity.Enabled = true;
 		}
 	}
 }
