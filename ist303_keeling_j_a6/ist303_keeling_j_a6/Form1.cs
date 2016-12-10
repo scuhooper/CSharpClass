@@ -99,8 +99,8 @@ namespace ist303_keeling_j_a6
 
 				// reset form
 				txtActivityName.Clear();
-				dtpDate.ResetText();
-				dtpTime.ResetText();
+				dtpDate.Value = DateTime.Now;
+				dtpTime.Value = DateTime.Now;
 			}
 		}
 
