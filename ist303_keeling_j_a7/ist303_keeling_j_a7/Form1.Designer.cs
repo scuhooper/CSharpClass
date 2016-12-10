@@ -31,6 +31,7 @@
 			this.txtFileList = new System.Windows.Forms.RichTextBox();
 			this.btnBrowse = new System.Windows.Forms.Button();
 			this.chkSubdirectories = new System.Windows.Forms.CheckBox();
+			this.btnQuit = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// txtFileList
@@ -61,11 +62,24 @@
 			this.chkSubdirectories.Text = "Include &Subdirectories and Folders?";
 			this.chkSubdirectories.UseVisualStyleBackColor = true;
 			// 
+			// btnQuit
+			// 
+			this.btnQuit.Location = new System.Drawing.Point(525, 449);
+			this.btnQuit.Name = "btnQuit";
+			this.btnQuit.Size = new System.Drawing.Size(94, 45);
+			this.btnQuit.TabIndex = 3;
+			this.btnQuit.Text = "&Quit";
+			this.btnQuit.UseVisualStyleBackColor = true;
+			this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
+			// 
 			// frmMain
 			// 
+			this.AcceptButton = this.btnBrowse;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(631, 562);
+			this.CancelButton = this.btnQuit;
+			this.ClientSize = new System.Drawing.Size(631, 504);
+			this.Controls.Add(this.btnQuit);
 			this.Controls.Add(this.chkSubdirectories);
 			this.Controls.Add(this.btnBrowse);
 			this.Controls.Add(this.txtFileList);
@@ -81,6 +95,7 @@
 		private System.Windows.Forms.RichTextBox txtFileList;
 		private System.Windows.Forms.Button btnBrowse;
 		private System.Windows.Forms.CheckBox chkSubdirectories;
+		private System.Windows.Forms.Button btnQuit;
 	}
 }
 
